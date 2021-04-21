@@ -1,13 +1,16 @@
 
-package com.thic.marvelmovies.Model.Network;
+package com.thic.marvelmovies.Model.models;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class Item {
+
     @SerializedName("adult")
     @Expose
     private Boolean adult;
