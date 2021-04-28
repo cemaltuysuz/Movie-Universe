@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.ImageViewCompat;
@@ -45,7 +46,15 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Ho
                 .into(holder.movieImg);
 
         holder.movieTitle.setText(movieList.get(position).getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,movieList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

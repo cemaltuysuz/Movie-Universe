@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -38,7 +39,6 @@ public class movies extends Fragment {
     public movies() {
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +52,9 @@ public class movies extends Fragment {
         View root = inflater.inflate(R.layout.fragment_movies, container, false);
 
         viewPager = root.findViewById(R.id.MainViewPager);
+        recyclerView = root.findViewById(R.id.verticalRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(),
+                LinearLayoutManager.VERTICAL,false));
 
         viewmodel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<CategoryModel>>() {
             @Override
@@ -60,6 +63,9 @@ public class movies extends Fragment {
                     adapter = new SliderAdapter(getActivity().getApplicationContext(),
                             categoryModels.get(categoryModels.size()-1).getMovieList());
                     viewPager.setAdapter(adapter);
+
+                    verticalAdapter = new VerticalAdapter(getActivity().getApplicationContext(),categoryModels);
+                    recyclerView.setAdapter(verticalAdapter);
                 }
             }
         });
