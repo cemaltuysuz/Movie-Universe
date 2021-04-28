@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navhost.xml"
+    app:startDestination="@id/movies">
+
+    <fragment
+        android:id="@+id/movies"
+        android:name="com.thic.marvelmovies.UI.fragments.movies"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies" >
+        <action
+            android:id="@+id/action_movies_to_favorites"
+            app:destination="@id/favorites" />
+        <action
+            android:id="@+id/action_movies_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.thic.marvelmovies.UI.fragments.favorites"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favorites_to_movies"
+            app:destination="@id/movies" />
+        <action
+            android:id="@+id/action_favorites_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/bottomSheet"
+        android:name="com.thic.marvelmovies.UI.fragments.BottomSheet"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheet_to_movies"
+            app:destination="@id/movies" />
+        <action
+            android:id="@+id/action_bottomSheet_to_favorites"
+            app:destination="@id/favorites" />
+    </fragment>
+</navigation>

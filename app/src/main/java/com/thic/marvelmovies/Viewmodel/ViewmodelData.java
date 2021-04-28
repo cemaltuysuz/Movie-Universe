@@ -7,28 +7,23 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.thic.marvelmovies.Model.models.CategoryModel;
 import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.Model.Local.RoomModel;
-import com.thic.marvelmovies.Model.models.Movie;
-import com.thic.marvelmovies.Model.Network.API;
-import com.thic.marvelmovies.Model.Network.ApiUtils;
 import com.thic.marvelmovies.Model.Repository;
 
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+public class ViewmodelData extends AndroidViewModel {
 
-public class MyViewmodel extends AndroidViewModel {
-
-    private MutableLiveData<List<Item>> movieList = new MutableLiveData<>();
+    public static MutableLiveData<List<CategoryModel>> categoryModelList = new MutableLiveData<>();
     private LiveData<List<RoomModel>> favoriteList;
 
     Repository repository;
-    private API dataApi = ApiUtils.api();
 
-    public MyViewmodel(@NonNull Application application) {
+    public ViewmodelData(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
         favoriteList = repository.getAllData();
@@ -44,15 +39,12 @@ public class MyViewmodel extends AndroidViewModel {
         repository.delete(model);
     }
 
-    //   Network Methods
-    public MutableLiveData<List<Item>> getMovieData(){
-        movieList.postValue(repository.getAllMovies());
-        return movieList;
-    }
-
-
     //Get Lists
-    public LiveData<List<RoomModel>> getFavoriteList(){ return favoriteList;
+    public LiveData<List<RoomModel>> getFavoriteList(){ return favoriteList;}
+
+    public MutableLiveData<List<CategoryModel>> getMovies (){
+        categoryModelList.setValue(repository.getCategoryLists());
+        return categoryModelList;
     }
 
 }

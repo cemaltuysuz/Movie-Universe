@@ -1,19 +1,26 @@
 package com.thic.marvelmovies.Model;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteMisuseException;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.thic.marvelmovies.Model.Local.Database;
 import com.thic.marvelmovies.Model.Local.FavoriteDao;
 import com.thic.marvelmovies.Model.Local.RoomModel;
 import com.thic.marvelmovies.Model.Network.API;
 import com.thic.marvelmovies.Model.Network.ApiUtils;
+import com.thic.marvelmovies.Model.models.CategoryModel;
 import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.Model.models.Movie;
+import com.thic.marvelmovies.Viewmodel.ViewmodelData;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,7 +33,11 @@ public class Repository {
     FavoriteDao dao;
 
     public static LiveData<List<RoomModel>> AllData;
-    public static List<Item> AllMovies;
+
+    //Actions
+    public List<Item> AllMovies = new ArrayList<>();
+    public List<CategoryModel>categoryLists = new ArrayList<>();
+    public boolean dataCheck = false;
 
     public Repository(Application application) {
         Database database = Database.database(application);
@@ -52,10 +63,9 @@ public class Repository {
     }
 
     // Network List
-    public List<Item> getAllMovies() {
-        return AllMovies;
+    public List<CategoryModel> getCategoryLists() {
+        return categoryLists;
     }
-
 
     //  <------  Asynctask  -------->
 
@@ -94,20 +104,80 @@ public class Repository {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                 List<Item>itemList = response.body().getItems();
-                for (Item i:itemList){
-                    Log.d("MovieID",i.getId().toString());
-                    Log.d("MovieID",i.getTitle());
-                    Log.d("MovieID",i.getVoteAverage().toString());
-                    Log.d("*******","*******");
-                }
-                AllMovies = itemList;
-                Log.d("Yonerge:","Succes 2");
-            }
 
+                AllMovies.addAll(itemList);
+                if (AllMovies.size()>0){
+                    dataCheck=true;
+                    run();
+                    ViewmodelData.categoryModelList.postValue(categoryLists);
+                }
+            }
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                Log.d("Yonerge:",t.getMessage());
+                dataCheck = false;
             }
         });
     }
+        public void run(){
+           for (int i = 0; i <AllMovies.size(); i++){
+               List<Item> temporaryList = new ArrayList<>();
+               Item item = AllMovies.get(i);
+               if (!categoryLists.isEmpty()){
+                   boolean check = false;
+
+                   for (int j = 0; j<categoryLists.size();j++){
+                       if (categoryLists.get(j).getIMDB() == item.getVoteAverage().intValue()){
+                           Log.d("EKLEME VAR ! =",categoryLists.get(j).getCategoryTitle()+" listesine "+
+                                   item.getVoteAverage().intValue() + " IMDB Lİ " + item.getTitle() + " film eklendi.");
+                           categoryLists.get(j).getMovieList().add(item);
+                           check = true;
+                           break;
+                       }
+                   }
+                   if (check == false){
+
+                       Log.d("YENİ LİSTE VAR ! =", item.getVoteAverage().intValue() +" IMDBLİ film listesi "+
+                               item.getVoteAverage().intValue() + " IMDB Lİ " + item.getTitle() + " film ile oluşturuldu.");
+                       temporaryList.clear();
+                       temporaryList.add(item);
+                       categoryLists.add(new CategoryModel(AllMovies.get(i).getId()
+                               ,AllMovies.get(i).getVoteAverage().intValue()
+                               ,"IMDB :" + item.getVoteAverage().intValue(),temporaryList));
+                       temporaryList.clear();
+                   }
+               }else {
+                   temporaryList.clear();
+                   temporaryList.add(item);
+                   categoryLists.add(new CategoryModel(item.getId()
+                           ,item.getVoteAverage().intValue()
+                           ,"IMDB :" + item.getVoteAverage().intValue(),temporaryList));
+                   temporaryList.clear();
+               }
+            }
+           sortList(categoryLists);
+           for (int i = 0; i<categoryLists.size();i++){
+                 Log.d("Category Title :",categoryLists.get(i).getCategoryTitle());
+                 Log.d("********","*********");
+
+                  for (int j = 0;j<categoryLists.get(i).getMovieList().size();j++){
+                   Log.d("Movie Title :",categoryLists.get(i).getMovieList().get(j).getTitle());
+                 Log.d("Movie IBDM :",String.valueOf(categoryLists.get(i).getMovieList().get(j).getVoteAverage().intValue()));
+             }
+           }
+        }
+
+
+    private void sortList(List<CategoryModel> categoryLists) {
+        Collections.sort(categoryLists, new Comparator<CategoryModel>() {
+            @Override
+            public int compare(CategoryModel o1, CategoryModel o2) {
+                Integer num1 = o1.getIMDB();
+                Integer num2 = o2.getIMDB();
+                return num1.compareTo(num2);
+            }
+        });
+    }
+
+
+
 }
