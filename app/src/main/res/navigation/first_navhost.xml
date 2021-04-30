@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_navhost.xml"
+    app:startDestination="@id/moviesContainer">
+
+    <fragment
+        android:id="@+id/moviesContainer"
+        android:name="com.thic.marvelmovies.moviesContainer"
+        android:label="fragment_movies_container"
+        tools:layout="@layout/fragment_movies_container" >
+        <action
+            android:id="@+id/action_moviesContainer_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.thic.marvelmovies.UI.fragments.BottomSheet"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheet_to_moviesContainer"
+            app:destination="@id/moviesContainer" />
+    </dialog>
+</navigation>

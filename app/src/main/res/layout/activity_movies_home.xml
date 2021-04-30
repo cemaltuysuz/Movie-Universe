@@ -12,25 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/navhost" />
-
-    <eightbitlab.com.blurview.BlurView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/blurView"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:outlineAmbientShadowColor="@android:color/transparent"
-            android:outlineSpotShadowColor="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/bottomBar"
-            app:menu="@menu/bottom_nav_menu"
-            android:background="@android:color/transparent"
-            app:itemIconTint="@drawable/bottomnav_selector"
-            app:itemTextColor="@drawable/bottomnav_selector"/>
-
-    </eightbitlab.com.blurview.BlurView>
+        app:navGraph="@navigation/first_navhost" />
 
 </RelativeLayout>

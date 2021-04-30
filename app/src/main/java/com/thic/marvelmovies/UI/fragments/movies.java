@@ -80,14 +80,6 @@ public class movies extends Fragment {
                 }
         });
 
-
-        //Burası sıkıntı
-        ViewmodelData.clickListener.observe(this, new Observer<Item>() {
-            @Override
-            public void onChanged(Item item) {
-                Navigation.findNavController(root).navigate(R.id.action_movies_to_bottomSheet);
-            }
-        });
         return root;
     }
 }

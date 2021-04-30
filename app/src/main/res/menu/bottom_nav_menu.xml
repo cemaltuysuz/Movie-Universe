@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/ic_home"
         android:title="home"
         android:icon="@drawable/ic_home"
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/ic_favorite"
         android:title="favorie"
         android:icon="@drawable/ic_empty_star"
         app:showAsAction="always"/>
