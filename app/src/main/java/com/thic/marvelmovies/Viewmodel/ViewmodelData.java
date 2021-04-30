@@ -12,12 +12,14 @@ import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.Model.Local.RoomModel;
 import com.thic.marvelmovies.Model.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 public class ViewmodelData extends AndroidViewModel {
 
+    public  List<List<Item>> sliderList;
     public static MutableLiveData<List<CategoryModel>> categoryModelList = new MutableLiveData<>();
     public static MutableLiveData<Boolean> networkResult = new MutableLiveData<>();
     public static MutableLiveData<Item> clickListener = new MutableLiveData<>();
@@ -29,6 +31,7 @@ public class ViewmodelData extends AndroidViewModel {
         super(application);
         repository = new Repository(application);
         favoriteList = repository.getAllData();
+        sliderList = repository.getSliderMovies();
     }
 
     //   ----------- Action methods -----------    //
@@ -49,4 +52,11 @@ public class ViewmodelData extends AndroidViewModel {
         return categoryModelList;
     }
 
+    public List<List<Item>> getSliderList() {
+        return sliderList;
+    }
+
+    public void setSliderList(List<List<Item>> sliderList) {
+        this.sliderList = sliderList;
+    }
 }

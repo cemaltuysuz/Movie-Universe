@@ -20,4 +20,5 @@ public interface FavoriteDao {
 
     @Query("Select * from favorites")
     LiveData<List<RoomModel>> getFavorites();
+
 }

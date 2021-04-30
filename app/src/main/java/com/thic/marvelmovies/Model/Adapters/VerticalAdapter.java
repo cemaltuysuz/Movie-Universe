@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thic.marvelmovies.Model.models.CategoryModel;
 import com.thic.marvelmovies.R;
 
+import java.util.Collections;
 import java.util.List;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalHolder> {

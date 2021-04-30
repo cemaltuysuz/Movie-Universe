@@ -26,6 +26,7 @@ import com.thic.marvelmovies.R;
 import com.thic.marvelmovies.Viewmodel.ViewmodelData;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -37,8 +38,9 @@ public class movies extends Fragment {
     private ViewmodelData viewmodel;
     private RecyclerView recyclerView;
     private VerticalAdapter verticalAdapter;
-    private List<CategoryModel> categoryModels = new ArrayList<>();
     private CircleIndicator indicator;
+    private boolean isReverse = false;
+    List<CategoryModel> categoryModels = new ArrayList<>();
 
     public movies() {
     }
@@ -68,7 +70,7 @@ public class movies extends Fragment {
                     if (aBoolean){
                         categoryModels = viewmodel.getMovies().getValue();
                         adapter = new SliderAdapter(getActivity().getApplicationContext(),
-                                categoryModels.get(categoryModels.size()-1).getMovieList());
+                                viewmodel.getSliderList().get(0));
                         viewPager.setAdapter(adapter);
 
                         verticalAdapter = new VerticalAdapter(getActivity().getApplicationContext(),categoryModels);

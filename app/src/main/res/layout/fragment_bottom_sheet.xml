@@ -56,16 +56,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/FocusTitle"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                android:textColor="@color/orange_tn"
-                android:paddingLeft="15dp"
-                android:text="Movie Title"
-                android:gravity="left"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:maxWidth="300dp"
+                    android:id="@+id/FocusTitle"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/orange_tn"
+                    android:paddingLeft="15dp"
+                    android:text="Movie Title"
+                    android:gravity="left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.like.LikeButton
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    app:icon_type="star"
+                    app:icon_size="15dp"
+                    android:id="@+id/star_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:circle_end_color="@color/orange_tn"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_marginTop="12dp"

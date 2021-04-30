@@ -3,6 +3,7 @@ package com.thic.marvelmovies.Model;
 import android.app.Application;
 import android.database.sqlite.SQLiteMisuseException;
 import android.os.AsyncTask;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 
@@ -37,8 +38,18 @@ public class Repository {
 
     //Actions
     public List<Item> AllMovies = new ArrayList<>();
+    public List<List<Item>> SliderMovies = new ArrayList<>();
     public List<CategoryModel>categoryLists = new ArrayList<>();
+
     public boolean dataCheck = false;
+
+    public List<List<Item>> getSliderMovies() {
+        return SliderMovies;
+    }
+
+    public void setSliderMovies(List<List<Item>> sliderMovies) {
+        SliderMovies = sliderMovies;
+    }
 
     public Repository(Application application) {
         Database database = Database.database(application);
@@ -156,7 +167,11 @@ public class Repository {
                }
             }
            sortList(categoryLists);
-           for (int i = 0; i<categoryLists.size();i++){
+
+            SliderMovies.add((List<Item>) categoryLists.get(categoryLists.size()-1).getMovieList());
+            categoryLists.remove(categoryLists.get(categoryLists.size()-1));
+
+         /*  for (int i = 0; i<categoryLists.size();i++){
                  Log.d("Category Title :",categoryLists.get(i).getCategoryTitle());
                  Log.d("********","*********");
 
@@ -164,7 +179,7 @@ public class Repository {
                    Log.d("Movie Title :",categoryLists.get(i).getMovieList().get(j).getTitle());
                  Log.d("Movie IBDM :",String.valueOf(categoryLists.get(i).getMovieList().get(j).getVoteAverage().intValue()));
              }
-           }
+           } */
         }
 
 

@@ -3,11 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.fragments.favorites">
+    tools:context=".UI.fragments.favorites"
+    android:background="@color/black_tn">
 
     <TextView
+        android:padding="20dp"
+        android:id="@+id/favoriteText"
+        android:textColor="@color/orange_tn"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favoriteText"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/favoriteText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/favoriteRecyclerView"/>
+
+
 
 </RelativeLayout>

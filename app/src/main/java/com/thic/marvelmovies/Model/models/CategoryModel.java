@@ -10,7 +10,6 @@ public class CategoryModel {
     private List<Item> movieList;
 
 
-
     public CategoryModel(int categoryID, int IMDB, String categoryTitle, List<Item> movieList) {
         this.categoryID = categoryID;
         this.IMDB = IMDB;
