@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
         HorizontalAdapter adapter = new HorizontalAdapter(context,categoryList.get(position).getMovieList());
         holder.horizontal.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.horizontal.setAdapter(adapter);
+
+        if (position == categoryList.size()-1) holder.layout.setPadding(0,0,0, 130);
+        else holder.layout.setPadding(0,0,0, 0);
     }
 
     @Override
@@ -50,10 +54,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
     public class VerticalHolder extends RecyclerView.ViewHolder {
         TextView categoryTitle;
         RecyclerView horizontal;
+        LinearLayout layout;
         public VerticalHolder(@NonNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.categoryText);
             horizontal = itemView.findViewById(R.id.horizontalRecyclerview);
+            layout = itemView.findViewById(R.id.Linear);
         }
     }
 }

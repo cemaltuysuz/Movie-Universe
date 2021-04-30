@@ -19,7 +19,8 @@ import java.util.logging.LogRecord;
 public class ViewmodelData extends AndroidViewModel {
 
     public static MutableLiveData<List<CategoryModel>> categoryModelList = new MutableLiveData<>();
-    public MutableLiveData<Boolean> networkResult = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> networkResult = new MutableLiveData<>();
+    public static MutableLiveData<Item> clickListener = new MutableLiveData<>();
     private LiveData<List<RoomModel>> favoriteList;
 
     Repository repository;

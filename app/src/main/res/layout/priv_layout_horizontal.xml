@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="130dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/black_tn"
-    android:gravity="center"
-    android:paddingBottom="?attr/actionBarSize">
+    android:background="@color/black_tn">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:id="@+id/imgCardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/black_tn">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginLeft="15dp"
             android:id="@+id/movieImg"
             android:background="@color/black_tn"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/anonim"
             android:scaleType="centerCrop"/>
 
+        <ProgressBar
+            android:id="@+id/single_movie_progress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"/>
+
     </androidx.cardview.widget.CardView>
+
     <TextView
+        android:textStyle="bold"
+        android:layout_below="@+id/imgCardView"
         android:layout_gravity="bottom|center"
         android:gravity="center"
         android:id="@+id/movieTitle"
         android:textColor="@color/white"
         android:padding="10dp"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Category Title"
         android:textColorHint="@color/white"/>
 
-
-
-
-
-
-
-</LinearLayout>
+</RelativeLayout>

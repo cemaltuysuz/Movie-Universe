@@ -4,6 +4,7 @@ import android.app.Application;
 import android.database.sqlite.SQLiteMisuseException;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -109,12 +110,12 @@ public class Repository {
                 if (AllMovies.size()>0){
                     dataCheck=true;
                     run();
-                    ViewmodelData.categoryModelList.postValue(categoryLists);
+                    ViewmodelData.networkResult.setValue(true);
                 }
             }
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                dataCheck = false;
+                ViewmodelData.networkResult.setValue(false);
             }
         });
     }
@@ -142,7 +143,7 @@ public class Repository {
                        temporaryList.add(item);
                        categoryLists.add(new CategoryModel(AllMovies.get(i).getId()
                                ,AllMovies.get(i).getVoteAverage().intValue()
-                               ,"IMDB :" + item.getVoteAverage().intValue(),temporaryList));
+                               ,"IMDb " + item.getVoteAverage().intValue(),temporaryList));
                        temporaryList.clear();
                    }
                }else {
@@ -150,7 +151,7 @@ public class Repository {
                    temporaryList.add(item);
                    categoryLists.add(new CategoryModel(item.getId()
                            ,item.getVoteAverage().intValue()
-                           ,"IMDB :" + item.getVoteAverage().intValue(),temporaryList));
+                           ,"IMDb " + item.getVoteAverage().intValue(),temporaryList));
                    temporaryList.clear();
                }
             }

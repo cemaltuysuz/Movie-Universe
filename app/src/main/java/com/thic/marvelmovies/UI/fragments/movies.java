@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -27,14 +28,17 @@ import com.thic.marvelmovies.Viewmodel.ViewmodelData;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class movies extends Fragment {
 
     private ViewPager viewPager;
-    private List<Item> movies = new ArrayList<>();
     private SliderAdapter adapter;
     private ViewmodelData viewmodel;
     private RecyclerView recyclerView;
     private VerticalAdapter verticalAdapter;
+    private List<CategoryModel> categoryModels = new ArrayList<>();
+    private CircleIndicator indicator;
 
     public movies() {
     }
@@ -53,20 +57,35 @@ public class movies extends Fragment {
 
         viewPager = root.findViewById(R.id.MainViewPager);
         recyclerView = root.findViewById(R.id.verticalRecyclerView);
+        indicator = root.findViewById(R.id.circle_indicator);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(),
                 LinearLayoutManager.VERTICAL,false));
 
-        viewmodel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<CategoryModel>>() {
+        ViewmodelData.networkResult.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onChanged(List<CategoryModel> categoryModels) {
-                if (categoryModels.size()>0){
-                    adapter = new SliderAdapter(getActivity().getApplicationContext(),
-                            categoryModels.get(categoryModels.size()-1).getMovieList());
-                    viewPager.setAdapter(adapter);
+            public void onChanged(Boolean aBoolean) {
 
-                    verticalAdapter = new VerticalAdapter(getActivity().getApplicationContext(),categoryModels);
-                    recyclerView.setAdapter(verticalAdapter);
+                    if (aBoolean){
+                        categoryModels = viewmodel.getMovies().getValue();
+                        adapter = new SliderAdapter(getActivity().getApplicationContext(),
+                                categoryModels.get(categoryModels.size()-1).getMovieList());
+                        viewPager.setAdapter(adapter);
+
+                        verticalAdapter = new VerticalAdapter(getActivity().getApplicationContext(),categoryModels);
+                        recyclerView.setAdapter(verticalAdapter);
+                        indicator.setViewPager(viewPager);
+                    }else {
+                        Toast.makeText(getActivity().getApplicationContext(),"Network eror.",Toast.LENGTH_SHORT).show();
+                    }
                 }
+        });
+
+
+        //Burası sıkıntı
+        ViewmodelData.clickListener.observe(this, new Observer<Item>() {
+            @Override
+            public void onChanged(Item item) {
+                Navigation.findNavController(root).navigate(R.id.action_movies_to_bottomSheet);
             }
         });
         return root;

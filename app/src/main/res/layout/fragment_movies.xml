@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.fragments.movies"
     android:background="@color/black_tn">
 
     <TextView
         android:id="@+id/bannerText"
-        android:textColor="@color/white"
+        android:textColor="@color/orange_tn"
         android:padding="18dp"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bannerText"/>
@@ -31,6 +32,11 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:id="@+id/MainViewPager"/>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/circle_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

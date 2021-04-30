@@ -20,11 +20,13 @@
             android:layout_height="200dp"/>
 
         <TextView
+            android:layout_margin="10dp"
+            android:background="@drawable/banner_title_background"
             android:id="@+id/bannerTitle"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black_tn"
             android:text="Thor : Ragnarok"
-            android:padding="10dp"
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"/>

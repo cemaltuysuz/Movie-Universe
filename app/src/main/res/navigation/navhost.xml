@@ -29,7 +29,7 @@
             android:id="@+id/action_favorites_to_bottomSheet"
             app:destination="@id/bottomSheet" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/bottomSheet"
         android:name="com.thic.marvelmovies.UI.fragments.BottomSheet"
         android:label="fragment_bottom_sheet"
@@ -40,5 +40,5 @@
         <action
             android:id="@+id/action_bottomSheet_to_favorites"
             app:destination="@id/favorites" />
-    </fragment>
+    </dialog>
 </navigation>
