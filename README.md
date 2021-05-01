@@ -6,9 +6,8 @@
 
 ##   Features
 
-- sorts movies by their IMDb point.
-- You can add movies to favorite
-- Save to local.
+- Sorts movies by their IMDb point.
+- You can add movies to favorite with Room.
 
 ##   What i did use ?
 
