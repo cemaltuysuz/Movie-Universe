@@ -1,8 +1,10 @@
 package com.thic.marvelmovies.Viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,6 +13,7 @@ import com.thic.marvelmovies.Model.models.CategoryModel;
 import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.Model.Local.RoomModel;
 import com.thic.marvelmovies.Model.Repository;
+import com.thic.marvelmovies.UI.fragments.movies;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +22,14 @@ import java.util.logging.LogRecord;
 
 public class ViewmodelData extends AndroidViewModel {
 
-    public  List<List<Item>> sliderList;
+    public List<List<Item>> sliderList;
+    public static Fragment movies = new movies();
+
     public static MutableLiveData<List<CategoryModel>> categoryModelList = new MutableLiveData<>();
     public static MutableLiveData<Boolean> networkResult = new MutableLiveData<>();
     public static MutableLiveData<Item> clickListener = new MutableLiveData<>();
+
+    public static MutableLiveData<Fragment> fragmentMutableLiveData = new MutableLiveData<>(movies);
     private LiveData<List<RoomModel>> favoriteList;
 
     Repository repository;

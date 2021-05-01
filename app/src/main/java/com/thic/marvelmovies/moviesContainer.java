@@ -5,16 +5,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.thic.marvelmovies.Model.models.Item;
@@ -46,7 +44,7 @@ public class moviesContainer extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies_container, container, false);
 
-        changeFragment(new movies());
+        changeFragment(ViewmodelData.fragmentMutableLiveData.getValue());
 
         bottomNavigationView = view.findViewById(R.id.bottomBar);
         blurView = view.findViewById(R.id.blurView);

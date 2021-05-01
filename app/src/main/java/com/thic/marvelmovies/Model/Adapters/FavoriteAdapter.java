@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,17 +19,19 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.thic.marvelmovies.Model.Local.RoomModel;
 import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoritesHolder> {
 
     Context context;
-    List<Item> favoriteList;
+    List<RoomModel> favoriteList;
 
-    public FavoriteAdapter(Context context, List<Item> favoriteList) {
+    public FavoriteAdapter(Context context,List<RoomModel> favoriteList) {
         this.context = context;
         this.favoriteList = favoriteList;
     }
@@ -36,7 +39,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @NonNull
     @Override
     public FavoritesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.priv_layout_horizontal,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.priv_layout_favorites,parent,false);
         return new FavoritesHolder(view);
     }
 
@@ -61,15 +64,16 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                 .centerCrop()
                 .into(holder.movieImg);
 
-        holder.movieText.setText(favoriteList.get(position).getTitle());
+        holder.movieText.setText(favoriteList.get(position).getMovieTitle());
+
+        if (position >6) holder.layout.setPadding(0,0,0, 130);
+        else holder.layout.setPadding(0,0,0, 0);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
-
     }
 
     @Override
@@ -82,12 +86,14 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         ImageView movieImg;
         TextView movieText;
         ProgressBar progressBar;
+        RelativeLayout layout;
 
         public FavoritesHolder(@NonNull View itemView) {
             super(itemView);
             movieImg = itemView.findViewById(R.id.favoriteImg);
-            movieText = itemView.findViewById(R.id.movieTitle);
+            movieText = itemView.findViewById(R.id.favoriteTitle);
             progressBar = itemView.findViewById(R.id.favorite_progress);
+            layout = itemView.findViewById(R.id.layoutFavorite);
         }
     }
 }

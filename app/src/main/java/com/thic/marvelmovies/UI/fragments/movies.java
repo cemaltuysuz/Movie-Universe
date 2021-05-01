@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.thic.marvelmovies.Viewmodel.ViewmodelData;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -39,7 +41,6 @@ public class movies extends Fragment {
     private RecyclerView recyclerView;
     private VerticalAdapter verticalAdapter;
     private CircleIndicator indicator;
-    private boolean isReverse = false;
     List<CategoryModel> categoryModels = new ArrayList<>();
 
     public movies() {
@@ -49,13 +50,12 @@ public class movies extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewmodel = new ViewModelProvider(requireActivity()).get(ViewmodelData.class);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_movies, container, false);
+            View root = inflater.inflate(R.layout.fragment_movies, container, false);
 
         viewPager = root.findViewById(R.id.MainViewPager);
         recyclerView = root.findViewById(R.id.verticalRecyclerView);

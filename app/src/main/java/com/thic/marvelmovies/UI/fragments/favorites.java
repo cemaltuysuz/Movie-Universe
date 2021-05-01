@@ -9,15 +9,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.thic.marvelmovies.Model.Adapters.FavoriteAdapter;
 import com.thic.marvelmovies.Model.Local.RoomModel;
+import com.thic.marvelmovies.Model.models.Item;
 import com.thic.marvelmovies.R;
 import com.thic.marvelmovies.Viewmodel.ViewmodelData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,7 +38,6 @@ public class favorites extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewmodel = new ViewModelProvider(this).get(ViewmodelData.class);
     }
 
@@ -45,11 +48,16 @@ public class favorites extends Fragment {
 
         recyclerView = root.findViewById(R.id.favoriteRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),2));
+        recyclerView.setHasFixedSize(true);
 
         viewmodel.getFavoriteList().observe(getViewLifecycleOwner(), new Observer<List<RoomModel>>() {
             @Override
             public void onChanged(List<RoomModel> roomModels) {
+                if (roomModels.size()>0){
+                    favoriteAdapter = new FavoriteAdapter(getActivity().getApplicationContext(),roomModels);
+                    recyclerView.setAdapter(favoriteAdapter);
 
+                }
             }
         });
 

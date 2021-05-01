@@ -148,8 +148,8 @@ public class Repository {
                    }
                    if (check == false){
 
-                       Log.d("YENİ LİSTE VAR ! =", item.getVoteAverage().intValue() +" IMDBLİ film listesi "+
-                               item.getVoteAverage().intValue() + " IMDB Lİ " + item.getTitle() + " film ile oluşturuldu.");
+                   //    Log.d("YENİ LİSTE VAR ! =", item.getVoteAverage().intValue() +" IMDBLİ film listesi "+
+                        //       item.getVoteAverage().intValue() + " IMDB Lİ " + item.getTitle() + " film ile oluşturuldu.");
                        temporaryList.clear();
                        temporaryList.add(item);
                        categoryLists.add(new CategoryModel(AllMovies.get(i).getId()
@@ -170,8 +170,9 @@ public class Repository {
 
             SliderMovies.add((List<Item>) categoryLists.get(categoryLists.size()-1).getMovieList());
             categoryLists.remove(categoryLists.get(categoryLists.size()-1));
+            Collections.reverse(categoryLists);
 
-         /*  for (int i = 0; i<categoryLists.size();i++){
+           for (int i = 0; i<categoryLists.size();i++){
                  Log.d("Category Title :",categoryLists.get(i).getCategoryTitle());
                  Log.d("********","*********");
 
@@ -179,7 +180,7 @@ public class Repository {
                    Log.d("Movie Title :",categoryLists.get(i).getMovieList().get(j).getTitle());
                  Log.d("Movie IBDM :",String.valueOf(categoryLists.get(i).getMovieList().get(j).getVoteAverage().intValue()));
              }
-           } */
+           }
         }
 
 
