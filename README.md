@@ -1,4 +1,4 @@
-# Movie-Universe
+# Movie-Universe v 1.0
 
 ![](https://media.giphy.com/media/9BmYdmjBmKW4d7mbmD/giphy.gif)
 
