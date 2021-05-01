@@ -1,6 +1,6 @@
 # Movie-Universe
 
-![Created Giphy](https://media.giphy.com/media/9BmYdmjBmKW4d7mbmD/giphy.gif)
+![Created Giphy](https://media1.giphy.com/media/9BmYdmjBmKW4d7mbmD/giphy.gif?cid=790b7611c9d832e3a09d0034ab59baf11a746c5df70362de&rid=giphy.gif&ct=g)
 
 
 
