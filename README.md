@@ -11,7 +11,6 @@
 
 ##   What i did use ?
 
-- MVVM
 - Room
 - Navigation
 - Retrofit2
